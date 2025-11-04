@@ -107,6 +107,7 @@ memories:
     image: 'https://user-images.githubusercontent.com/15072044/41163238-0ac8184e-6b30-11e8-9e84-25433de7accc.jpg'
     caption: 'Into the zone!'
     user: admin
+    X-API-KEY: edd1c9f034335f136f87ad84b625c8f1
   -
     image: 'https://user-images.githubusercontent.com/15072044/41160165-c1f285b8-6b26-11e8-848b-8b15c3c35f94.jpg'
     caption: 'My burger will be like this!'

@@ -73,27 +73,17 @@ jobs:
         run: |
           docker build -t app-under-test:ci .
 
-      # Trivy veritabanı ve cache (büyük hız kazandırır)
-      - name: Cache Trivy DB
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/trivy
-          key: trivy-db-${{ runner.os }}-${{ hashFiles('Dockerfile', '**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml', '**/poetry.lock') }}
-          restore-keys: trivy-db-${{ runner.os }}-
-  
-      - name: Trivy scan (image → SARIF)
+      - name: Trivy scan (image)
         run: |
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v "$PWD:/work" -w /work \
-            -v "$HOME/.cache/trivy:/root/.cache/trivy" \
             aquasec/trivy:latest image \
             --scanners vuln \
-            --exit-code 0 \
             --format sarif \
             --output trivy.sarif \
-            app-under-test:ci
-  
+            app-under-test:ci || true
+
       - name: Upload SARIF (Trivy)
         uses: github/codeql-action/upload-sarif@v3
         with:

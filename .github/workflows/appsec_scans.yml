@@ -17,6 +17,7 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      
     name: SAST (CodeQL JS/TS - security-extended)
     runs-on: ubuntu-latest
     steps:

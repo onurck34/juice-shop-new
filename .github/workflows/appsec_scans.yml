@@ -40,6 +40,7 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo (full history)
@@ -53,7 +54,8 @@ jobs:
             detect --source /repo \
             --report-format sarif \
             --report-path /repo/gitleaks.sarif \
-            --no-banner || true
+            --exit-code 0 \
+            --no-banner
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
@@ -67,6 +69,7 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      
     name: Container Scan (Trivy)
     runs-on: ubuntu-latest
     steps:

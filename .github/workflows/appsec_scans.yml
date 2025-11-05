@@ -1,10 +1,10 @@
 name: Security Pipeline (SAST, Secrets, Container)
 
 on:
-  # push:
-  #   branches: [ "main", "master" ]
-  # pull_request:
-  #   branches: [ "main", "master" ]
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
   workflow_dispatch:
     
 concurrency:
@@ -26,9 +26,9 @@ jobs:
       - name: Initialize CodeQL (JS/TS)
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript         # TypeScript'i de kapsar
+          languages: javascript         
           queries: +security-extended
-          build-mode: none              # JS/TS için build gerekmez
+          build-mode: none             
 
       - name: Analyze (JS/TS)
         uses: github/codeql-action/analyze@v3
